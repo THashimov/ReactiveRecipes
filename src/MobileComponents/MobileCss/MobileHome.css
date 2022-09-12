@@ -1,0 +1,59 @@
+.mobileHome {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+}
+
+.burgerMenu {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    align-content: flex-start;
+    background-color: white;
+    margin: 0.5rem 0 1rem 0;
+    border: none;
+    width: 92.5%;
+}
+
+.burgerMenu svg {
+    color: #43AC5A;
+}
+
+.mainLogo {
+    width: 90%;
+}
+
+.mobileHome h1 {
+    color: #43AC5A;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: auto;
+    margin-bottom: 1rem;
+}
+
+.mobileHome h2 {
+    color: #43AC5A;
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: auto;
+}
+
+#getStartedBtn {
+    display: flex;
+    margin-bottom: auto;
+    text-decoration: none;
+    background-color: #599F8E;
+    color: white;
+    width: 50%;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 1rem;
+}
+
+.zeroWasteImg {
+    height: 55%;
+}
