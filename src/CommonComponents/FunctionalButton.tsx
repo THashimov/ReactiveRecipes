@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 type T = {
     title: string;
     id: string;
+    imgSrc: string
 };
 
-const FunctionalButton: React.FC<T> = ({title, id}) => {
+const FunctionalButton: React.FC<T> = ({title, id, imgSrc}) => {
     const specialChars: RegExp = /\W|_/g;
     let path: string = '';
     if (title.match(specialChars)) {
@@ -22,6 +23,7 @@ const FunctionalButton: React.FC<T> = ({title, id}) => {
 
     return (
         <Link to={'/' + path} id={id}>
+          {imgSrc && <img src={imgSrc} alt="" />}
             {title}
         </Link>
       );

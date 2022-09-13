@@ -1,0 +1,63 @@
+.sidebar {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    left: 0;
+    width: var(--sidebarWidth);
+    height: 100vh;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #8E8B8B;
+}
+
+.sidebarLogo {
+    margin-bottom: auto;
+    padding-top: 10%;
+}
+
+.feedContainer,
+.myRecipesContainer {
+    font-size: 17px;
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    width: var(--funcBtnWidth);
+}
+
+.myRecipesContainer {
+    margin-bottom: 80%;
+}
+
+.feedContainer {
+    margin-bottom: 40%;
+}
+
+#registerBtn {
+    margin-bottom: auto;
+}
+
+.feedContainer p,
+.myRecipesContainer p {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar.showing {
+    box-shadow: #00000080 0px 0px 50px 100vw;
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+    transition-duration: 1s;
+}
+
+.sidebar.hidden {
+    -webkit-transform: translateX(calc(var(--sidebarWidth) * -1));
+    -ms-transform: translateX(calc(var(--sidebarWidth) * -1));
+    transform: translateX(calc(var(--sidebarWidth) * -1));
+    transition-duration: 1s;
+    left: calc(var(--sidebarWidth) * -1);
+}
