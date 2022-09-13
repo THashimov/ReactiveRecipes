@@ -21,7 +21,8 @@
     color: #43AC5A;
 }
 
-.mainLogo {
+.mobileHomeLogo,
+.sidebarLogo {
     width: 90%;
 }
 
@@ -41,19 +42,31 @@
 }
 
 #getStartedBtn {
-    display: flex;
     margin-bottom: auto;
-    text-decoration: none;
-    background-color: #599F8E;
-    color: white;
-    width: 50%;
-    height: 50px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    margin-top: 1rem;
 }
 
 .zeroWasteImg {
     height: 55%;
+}
+
+.sidebarCloseBtn {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    z-index: 1;
+    color: black !important;
+}
+
+.sidebarCloseBtn.showing {
+    -webkit-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.sidebarCloseBtn.hidden {
+    -webkit-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    opacity: 0;
 }
