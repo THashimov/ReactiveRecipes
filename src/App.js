@@ -29,7 +29,7 @@ function App() {
         <Route exact path = '/' 
           element = {homeType}>
           </Route>
-          <Route path = '/register'
+          <Route path = '/registerlogin'
             element = {<RegisterPage />}>
           </Route>
       </Routes>
