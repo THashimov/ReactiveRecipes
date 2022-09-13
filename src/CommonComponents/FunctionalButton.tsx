@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 type T = {
     title: string;
     id: string;
-    imgSrc: string
+    imgSrc: string | null;
 };
 
 const FunctionalButton: React.FC<T> = ({title, id, imgSrc}) => {

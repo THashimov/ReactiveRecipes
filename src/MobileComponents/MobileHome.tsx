@@ -21,9 +21,11 @@ const MobileHome: React.FC = () => {
           <Sidebar class={sidebarAnim}/>
           <BurgerMenu isSidebarOpen={sidebarView} setSidebarState={setSidebarState}/>
           <MainLogo class='mobileHomeLogo' />
-          <h1>Welcome To Reactive Recipes</h1>
-          <h2>Let Us Help You Reduce Food Wastse</h2>
-          <FunctionalButton title='Get Started' id='getStartedBtn'/>
+          <div className="mobileHomeInfoText">
+            <h1>Welcome To Reactive Recipes</h1>
+            <h2>Let Us Help You Reduce Food Waste</h2>
+          </div>
+          <FunctionalButton title='Get Started' id='getStartedBtn' imgSrc={null}/>
           <img src={ZeroWasteImg} alt="" className='zeroWasteImg' />
       </div>
     )

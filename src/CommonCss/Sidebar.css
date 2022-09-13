@@ -1,3 +1,7 @@
+:root {
+    --sidebarWidth: 16em;
+}
+
 .sidebar {
     position: absolute;
     background-color: white;
@@ -16,8 +20,11 @@
 }
 
 .sidebarLogo {
+    margin-top: 4em;
+}
+
+#registerBtn {
     margin-bottom: auto;
-    padding-top: 10%;
 }
 
 .feedContainer,
@@ -26,25 +33,27 @@
     display: flex;
     align-items: left;
     flex-direction: column;
-    width: var(--funcBtnWidth);
+    width: 8rem;
 }
 
 .myRecipesContainer {
-    margin-bottom: 80%;
+    margin-bottom: auto;
 }
 
 .feedContainer {
-    margin-bottom: 40%;
-}
-
-#registerBtn {
-    margin-bottom: auto;
+    margin-bottom: 6em;
 }
 
 .feedContainer p,
 .myRecipesContainer p {
     margin-bottom: 0.5rem;
 }
+
+
+.aboutUs {
+    margin-bottom: 0.5em;
+}
+
 
 .sidebar.showing {
     box-shadow: #00000080 0px 0px 50px 100vw;

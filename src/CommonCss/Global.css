@@ -8,8 +8,7 @@
 }
 
 :root {
-    --sidebarWidth: 70%;
-    --funcBtnWidth: 70%;
+    --funcBtnWidth: 15em;
 }
 
 /* -- -- -- -- -- -- -- -- -- -- Functional Buttons -- -- -- -- -- -- -- -- -- -- */

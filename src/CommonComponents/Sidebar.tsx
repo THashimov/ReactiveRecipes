@@ -13,7 +13,7 @@ const Sidebar: React.FC<SidebarProps> = (prop) => {
     return (
         <div className={prop.class}>
             <MainLogo class='sidebarLogo'/>
-            <FunctionalButton title='Register / Log In' id='registerBtn' />
+            <FunctionalButton title='Register / Log In' id='registerBtn' imgSrc={null}/>
             <div className="feedContainer">
                 <p>Feed</p>
                 <Link to={'/recipes/browse'}>Browse Recipes</Link>

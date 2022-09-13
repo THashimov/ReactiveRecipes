@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {HiMenu} from 'react-icons/hi'
+import React, { ReactNode, useEffect, useState } from 'react';
+import { HiMenu } from 'react-icons/hi'
 import { MdOutlineClose } from 'react-icons/md';
 
 import changeSidebarView from '../CommonComponents/ChangeSidebarView';
@@ -10,16 +10,19 @@ interface BurgerMenuProps {
 }
  
 const BurgerMenu: React.FC<BurgerMenuProps> = (prop) => {
-    const [closeBtnClass, setCloseBtnClass] = useState<string>('sidebarCloseBtn hidden');
+    const [btnToRender, setBtnToRender] = useState<ReactNode>(<HiMenu/>);
 
     useEffect(() => {
-        prop.isSidebarOpen ? setCloseBtnClass('sidebarCloseBtn showing') : setCloseBtnClass('sidebarCloseBtn hidden');
+        if (prop.isSidebarOpen) {
+            setBtnToRender(<MdOutlineClose onClick={() => {changeSidebarView(prop)}} size={40}/>)
+        } else {
+            setBtnToRender(<HiMenu onClick={() => {changeSidebarView(prop)}} size={40}/>)
+        }
     }, [prop.isSidebarOpen]);
 
     return (
         <button className="burgerMenu">
-            <HiMenu onClick={() =>{changeSidebarView(prop)}} size={60}/>
-            <MdOutlineClose onClick={() => {changeSidebarView(prop)}} className={closeBtnClass} size={40}/>
+            {btnToRender} 
         </button>
       );
 }

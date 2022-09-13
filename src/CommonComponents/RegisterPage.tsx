@@ -17,8 +17,10 @@ const RegisterPage: React.FC<RegisterPageProps> = () => {
     return (
         <div className="registerPage">
             <MainLogo class='registerPageLogo'/>
-            <h2>Exciting Recipes Are Waiting</h2>
-            <p>Connect Now And Customise Your Life</p>
+            <div className="registerPageTextContainer">
+                <h2>Exciting Recipes Are Waiting</h2>
+                <p>Connect Now And Customise Your Life</p>
+            </div>
             <div className="loginBtnsContainer">
             <FunctionalButton title='Connect With Facebook' id='facebookBtn' imgSrc={Facebook}/>
             <FunctionalButton title='Connect With Google' id='googleBtn' imgSrc={Google}/>
