@@ -7,7 +7,19 @@ type T = {
 };
 
 const FunctionalButton: React.FC<T> = ({title, id}) => {
-    const path: string = title.replace(/\s/g, '').toLowerCase();
+    const specialChars: RegExp = /\W|_/g;
+    let path: string = '';
+    if (title.match(specialChars)) {
+      let i: number = 0;
+      // Weird typescript error. Not totally sure why this happens
+      while (title[i] !== specialChars && title[i] != ' ') {
+        path += title[i].toLowerCase();
+        i++;
+      }
+    } else {
+      path = '/' + title.replace(/\s/g, '').toLowerCase();
+    }
+
     return (
         <Link to={'/' + path} id={id}>
             {title}

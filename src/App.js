@@ -8,6 +8,7 @@ import DesktopHome from './DesktopComponents/DesktopHome';
 
 import './MobileComponents/MobileCss/MobileHome.css';
 import './CommonCss/Global.css';
+import RegisterPage from './CommonComponents/RegisterPage';
 
 function App() {
   const [homeType, setHomeType] = useState();
@@ -22,6 +23,9 @@ function App() {
       <Routes>
         <Route exact path = '/' 
           element = {homeType}>
+          </Route>
+          <Route path = '/register'
+            element = {<RegisterPage />}>
           </Route>
       </Routes>
     </BrowserRouter>

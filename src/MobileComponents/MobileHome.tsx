@@ -23,7 +23,7 @@ const MobileHome: React.FC = () => {
           <MainLogo class='mobileHomeLogo' />
           <h1>Welcome To Reactive Recipes</h1>
           <h2>Let Us Help You Reduce Food Wastse</h2>
-          <FunctionalButton title={'Get Started'} id={'getStartedBtn'}/>
+          <FunctionalButton title='Get Started' id='getStartedBtn'/>
           <img src={ZeroWasteImg} alt="" className='zeroWasteImg' />
       </div>
     )

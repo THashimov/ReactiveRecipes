@@ -8,8 +8,8 @@
 }
 
 :root {
-    --sidebarWidth: 17rem;
-    --funcBtnWidth: 10rem;
+    --sidebarWidth: 70%;
+    --funcBtnWidth: 70%;
 }
 
 /* -- -- -- -- -- -- -- -- -- -- Functional Buttons -- -- -- -- -- -- -- -- -- -- */
@@ -25,7 +25,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    margin-top: 1rem;
     font-size: 17px;
 }
 
@@ -46,12 +45,11 @@
 .sidebar a {
     text-decoration: none;
     color: #8E8B8B;
-    margin-top: 0.5rem;
 }
 
 .sidebarLogo {
     margin-bottom: auto;
-    padding-top: 1rem;
+    padding-top: 10%;
 }
 
 .feedContainer,
@@ -64,11 +62,11 @@
 }
 
 .myRecipesContainer {
-    margin-bottom: 15rem;
+    margin-bottom: 80%;
 }
 
 .feedContainer {
-    margin-bottom: 5rem;
+    margin-bottom: 40%;
 }
 
 #registerBtn {
@@ -93,5 +91,8 @@
     -ms-transform: translateX(calc(var(--sidebarWidth) * -1));
     transform: translateX(calc(var(--sidebarWidth) * -1));
     transition-duration: 1s;
+    left: calc(var(--sidebarWidth) * -1);
 }
+
+
 /* -- -- -- -- -- -- -- -- -- -- xxxxx -- -- -- -- -- -- -- -- -- -- */
