@@ -2,31 +2,28 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import MainLogo from "../CommonComponents/MainLogo";
+import SidebarCards from "./Classes/SidebarCards";
 import FunctionalButton from "./FunctionalButton";
+import GenerateCardsContainer from "./GenerateCardsContainers";
 
 interface SidebarProps {
-    class: string
+    class: string;
+    sidebarCards: SidebarCards [];
 }
  
 const Sidebar: React.FC<SidebarProps> = (prop) => {
-    
+    let containers: JSX.Element [] = [];
+
+    for (let i = 0; i < prop.sidebarCards.length; i++) {
+        prop.sidebarCards[i].generatePaths();
+        containers.push(<GenerateCardsContainer cardsData={prop.sidebarCards[i]} key={i}/>);
+    }
+
     return (
         <div className={prop.class}>
             <MainLogo class='sidebarLogo'/>
             <FunctionalButton title='Register / Log In' id='registerBtn' imgSrc={null}/>
-            <div className="feedContainer">
-                <p>Feed</p>
-                <Link to={'/recipes/browse'}>Browse Recipes</Link>
-                <Link to={'/recipes/trending'}>Trending Recipes</Link>
-                <Link to={'/recipes/random'}>Chose For Me</Link>
-            </div>
-            <div className="myRecipesContainer">
-                <p>My Recipes</p>
-                <Link to={'/myrecipes/breakfast'}>Breakfast</Link>
-                <Link to={'/myrecipes/lunch'}>Lunch</Link>
-                <Link to={'/myrecipes/dinner'}>Dinner</Link>
-                <Link to={'/shoppinglist/myshoppinglist'}>Shopping List</Link>
-            </div>
+            {containers}
             <Link className="aboutUs" to={'/aboutus'}>About Us</Link>
         </div>
         );
