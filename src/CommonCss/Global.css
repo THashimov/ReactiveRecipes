@@ -8,27 +8,23 @@
 }
 
 :root {
-    --funcBtnWidth: 14em;
+    --funcBtnWidth: 16em;
 }
 
 /* -- -- -- -- -- -- -- -- -- -- Functional Buttons -- -- -- -- -- -- -- -- -- -- */
 
-#getStartedBtn,
-#registerBtn,
-#facebookBtn,
-#googleBtn,
-#appleBtn,
-#emailBtn {
+.functionalBtn {
     display: flex;
     text-decoration: none;
     background-color: #599F8E;
     color: white;
-    width: var(--funcBtnWidth);
+    max-width: var(--funcBtnWidth);
+    width: 100%;
     height: 50px;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 /* -- -- -- -- -- -- -- -- -- -- xxxxx -- -- -- -- -- -- -- -- -- -- */

@@ -22,7 +22,7 @@ const Sidebar: React.FC<SidebarProps> = (prop) => {
     return (
         <div className={prop.class}>
             <MainLogo class='sidebarLogo'/>
-            <FunctionalButton title='Register / Log In' id='registerBtn' imgSrc={null}/>
+            <FunctionalButton title='Register / Log In' whichClass='functionalBtn registerBtn' imgSrc={null}/>
             {containers}
             <Link className="aboutUs" to={'/aboutus'}>About Us</Link>
         </div>

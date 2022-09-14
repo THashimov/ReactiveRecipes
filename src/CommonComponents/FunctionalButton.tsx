@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 
 type T = {
     title: string;
-    id: string;
+    whichClass: string;
     imgSrc: string | null;
 };
 
-const FunctionalButton: React.FC<T> = ({title, id, imgSrc}) => {
+const FunctionalButton: React.FC<T> = ({title, whichClass, imgSrc}) => {
     const path = title.replace(/\s|\//g, '').toLowerCase();
 
     return (
-        <Link to={'/' + path} id={id}>
+        <Link to={'/' + path} className={whichClass}>
           {imgSrc && <img src={imgSrc} alt="" />}
             {title}
         </Link>

@@ -1,8 +1,10 @@
 :root {
-    --sidebarWidth: 16em;
+    --mobileSidebarWidth: 18em;
+    --desktopSidebarWidth: 20%;
 }
 
-.sidebar {
+.sidebarMobile,
+.sidebarDesktop {
     position: absolute;
     background-color: white;
     display: flex;
@@ -10,11 +12,20 @@
     align-items: center;
     justify-content: space-evenly;
     left: 0;
-    width: var(--sidebarWidth);
     height: 100vh;
 }
 
-.sidebar a {
+.sidebarMobile {
+    width: var(--mobileSidebarWidth);
+}
+
+.sidebarDesktop {
+    width: var(--desktopSidebarWidth);
+    box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 25%);
+}
+
+.sidebarMobile a,
+.sidebarDesktop a {
     text-decoration: none;
     color: #8E8B8B;
 }
@@ -23,17 +34,23 @@
     margin-top: 4em;
 }
 
-#registerBtn {
+.registerBtn {
     margin-bottom: auto;
+    color: white !important;
 }
 
 .feedContainer,
 .myRecipesContainer {
     font-size: 17px;
     display: flex;
-    align-items: left;
+    align-items: center;
     flex-direction: column;
-    width: 8rem;
+    width: 100%;
+}
+
+.feedContainer a,
+.myRecipesContainer a{
+    padding-top: 0.5em;
 }
 
 .myRecipesContainer {
@@ -54,8 +71,7 @@
     margin-bottom: 0.5em;
 }
 
-
-.sidebar.showing {
+.sidebarMobile.showing {
     box-shadow: #00000080 0px 0px 50px 100vw;
     -webkit-transform: translateX(0);
     -ms-transform: translateX(0);
@@ -63,10 +79,17 @@
     transition-duration: 1s;
 }
 
-.sidebar.hidden {
-    -webkit-transform: translateX(calc(var(--sidebarWidth) * -1));
-    -ms-transform: translateX(calc(var(--sidebarWidth) * -1));
-    transform: translateX(calc(var(--sidebarWidth) * -1));
+.sidebarMobile.hidden {
+    -webkit-transform: translateX(calc(var(--mobileSidebarWidth) * -1));
+    -ms-transform: translateX(calc(var(--mobileSidebarWidth) * -1));
+    transform: translateX(calc(var(--mobileSidebarWidth) * -1));
     transition-duration: 1s;
-    left: calc(var(--sidebarWidth) * -1);
+    left: calc(var(--mobileSidebarWidth) * -1);
+}
+
+.sidebarDesktop a:hover {
+    color: #599F8E;
+    -webkit-transition: color 0.3s ease-in-out;
+    -ms-transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out;
 }

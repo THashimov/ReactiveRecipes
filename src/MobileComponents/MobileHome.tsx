@@ -10,13 +10,13 @@ import SidebarCards from "../CommonComponents/Classes/SidebarCards";
 
 const MobileHome: React.FC = () => {
     const [sidebarView, setSidebarState] = useState<boolean>(false);
-    const [sidebarAnim, setSidebarAnim] = useState<string>('sidebar hidden');
-    
+    const [sidebarAnim, setSidebarAnim] = useState<string>('sidebarMobile hidden');
+
     const sidebarFeed = new SidebarCards('Feed', ['Browse Recipes', 'Trending Recipes', 'Chose For Me']);
     const sidebarMyRecipes = new SidebarCards('My Recipes', ['Breakfast', 'Lunch', 'Dinner', 'Shopping List']);
 
     useEffect(() => {
-      sidebarView ? setSidebarAnim('sidebar showing') : setSidebarAnim('sidebar hidden');
+      sidebarView ? setSidebarAnim('sidebarMobile showing') : setSidebarAnim('sidebarMobile hidden');
     }, [sidebarView]);
 
     return (
@@ -28,7 +28,7 @@ const MobileHome: React.FC = () => {
             <h1>Welcome To Reactive Recipes</h1>
             <h2>Let Us Help You Reduce Food Waste</h2>
           </div>
-          <FunctionalButton title='Get Started' id='getStartedBtn' imgSrc={null}/>
+          <FunctionalButton title='Get Started' whichClass='functionalBtn getStartedBtn' imgSrc={null}/>
           <img src={ZeroWasteImg} alt="" className='zeroWasteImg' />
       </div>
     )

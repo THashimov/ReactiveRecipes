@@ -9,6 +9,7 @@ import RegisterPage from './CommonComponents/RegisterPage';
 
 
 import './MobileComponents/MobileCss/MobileHome.css';
+import './DesktopComponents/Desktopcss/DesktopHome.css';
 import './CommonCss/Global.css';
 import './CommonCss/Sidebar.css';
 import './CommonCss/Register.css';
@@ -17,9 +18,16 @@ import './CommonCss/Register.css';
 
 function App() {
   const [homeType, setHomeType] = useState();
+  const [whichClass, setWhichClass] = useState();
 
   useEffect(() => {
-    isMobile ? setHomeType(<MobileHome />) : setHomeType(<DesktopHome />);
+    if (isMobile && window.innerWidth <= 480) {
+      setHomeType(<MobileHome />);
+      setWhichClass('registerPageMobile')
+    } else {
+      setHomeType(<DesktopHome />);
+      setWhichClass('registerPageDesktop');
+    }
   }, [])
 
 
@@ -30,7 +38,7 @@ function App() {
           element = {homeType}>
           </Route>
           <Route path = '/registerlogin'
-            element = {<RegisterPage />}>
+            element = {<RegisterPage whichClass={whichClass}/>}>
           </Route>
       </Routes>
     </BrowserRouter>

@@ -10,22 +10,23 @@ import Google from '../assets/google.png';
 import FunctionalButton from "./FunctionalButton";
 
 interface RegisterPageProps {
-    
+    whichClass: string;
 }
  
-const RegisterPage: React.FC<RegisterPageProps> = () => {
+const RegisterPage: React.FC<RegisterPageProps> = (prop) => {
+
     return (
-        <div className="registerPage">
+        <div className={prop.whichClass}>
             <MainLogo class='registerPageLogo'/>
             <div className="registerPageTextContainer">
                 <h2>Exciting Recipes Are Waiting</h2>
                 <p>Connect Now And Customise Your Life</p>
             </div>
             <div className="loginBtnsContainer">
-            <FunctionalButton title='Connect With Facebook' id='facebookBtn' imgSrc={Facebook}/>
-            <FunctionalButton title='Connect With Google' id='googleBtn' imgSrc={Google}/>
-            <FunctionalButton title='Connect With Apple' id='appleBtn' imgSrc={Apple}/>
-            <FunctionalButton title='Connect With Email' id='emailBtn' imgSrc={Email}/>
+            <FunctionalButton title='Connect With Facebook' whichClass='functionalBtn facebookBtn' imgSrc={Facebook}/>
+            <FunctionalButton title='Connect With Google' whichClass='functionalBtn googleBtn' imgSrc={Google}/>
+            <FunctionalButton title='Connect With Apple' whichClass='functionalBtn appleBtn' imgSrc={Apple}/>
+            <FunctionalButton title='Connect With Email' whichClass='functionalBtn emailBtn' imgSrc={Email}/>
             </div>
         </div>
         );
