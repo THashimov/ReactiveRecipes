@@ -9,13 +9,13 @@ class SidebarCards {
         this.linkPaths = [];
     }
 
-    generatePaths() {
+    generatePaths(customPath: String) {
         for (let i = 0; i < this.linkTitles.length; i++) {
             if (this.linkTitles[i] === 'Feed' || this.linkTitles[i] === 'My Recipes') {
               this.linkPaths.push(this.linkTitles[i]);
               continue;
             } else {
-              this.linkPaths.push('/' + this.linkTitles[i].replace(/\s/g, '').toLowerCase())
+              this.linkPaths.push('/recipes/' + customPath + this.linkTitles[i].replace(/\s/g, '-').toLowerCase())
             }
         }
     }

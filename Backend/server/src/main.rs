@@ -1,10 +1,10 @@
 #[macro_use] extern crate rocket;
 
 
-use std::env;
+use std::{env, io::Cursor, fmt::Error};
 
-use mongodb::{Client, Collection, options::FindOptions, error::Error, bson::{Document, doc}};
-use rocket::{serde::json::{Json}, futures::{TryStreamExt, StreamExt}, fs::{FileServer}};
+use mongodb::{Client, Collection, bson::{Document, doc, from_document}};
+use rocket::{serde::json::{Json, serde_json}, futures::{TryStreamExt}, fs::{FileServer}, response::{content::RawJavaScript, Responder, self}, Request, Response, http::ContentType};
 use dotenv::dotenv;
 use serde::{Serialize, Deserialize};
 
@@ -19,7 +19,7 @@ struct SavedRecipes {
     saved_recipes: Vec<Recipe>
 }
 
-#[post("/add-recipe", data = "<recipe>")]
+#[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>) {
     let recipes = connect_to_db().await;
 
@@ -29,14 +29,19 @@ async fn save_recipe(recipe: Json<Recipe>) {
     }, None).await.unwrap();
 }
 
-#[get("/my-recipes/all")]
-async fn retrieve_all_saved_recipes()  {
+#[get("/my-recipes/all-recipes")]
+async fn retrieve_all_saved_recipes() -> Result<String, Error> {
     let recipes = connect_to_db().await;
-    let cursor = recipes.find(None, None).await.unwrap();
+ 
+    let mut cursor = recipes.find(None, None).await.unwrap();
 
-    let results: Vec<Result<Document, Error>> = cursor.collect().await;
+    let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
+    while let Some(result) = cursor.try_next().await.unwrap() {
+        let result: Recipe = from_document(result).unwrap();
+        all_recipes.saved_recipes.push(result)
+    }
 
-    println!("{:?}", results);
+    serde_json::to_string(&all_recipes)
 }
 
 #[get("/my-recipes/<recipe_name>")]

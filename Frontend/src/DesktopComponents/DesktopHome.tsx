@@ -9,7 +9,7 @@ import Img from '../assets/GenericFoodImg.webp';
 
 const DesktopHome: React.FC = () => {
     const sidebarFeed = new SidebarCards('Feed', ['Browse Recipes', 'Search By Ingredient', 'Search By Cuisine', 'Search By Country', 'Search For Snacks', 'Search For Desserts']);
-    const sidebarMyRecipes = new SidebarCards('My Recipes', ['Breakfast', 'Lunch', 'Dinner', 'Shopping List']);
+    const sidebarMyRecipes = new SidebarCards('My Recipes', ['All Recipes', 'Breakfast', 'Lunch', 'Dinner', 'Shopping List']);
 
 
     return (
@@ -28,7 +28,6 @@ const DesktopHome: React.FC = () => {
                         <img src={Img} alt='' />
                         <img src={Img} alt='' />
                         <img src={Img} alt='' />
-
                     </div>
                 </div>
             </div>

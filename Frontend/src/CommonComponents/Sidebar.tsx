@@ -15,8 +15,13 @@ const Sidebar: React.FC<SidebarProps> = (prop) => {
     let containers: JSX.Element [] = [];
 
     for (let i = 0; i < prop.sidebarCards.length; i++) {
-        prop.sidebarCards[i].generatePaths();
-        containers.push(<GenerateCardsContainer cardsData={prop.sidebarCards[i]} key={i}/>);
+        if (prop.sidebarCards[i].title === 'My Recipes') {
+            prop.sidebarCards[i].generatePaths('my-recipes/');
+            containers.push(<GenerateCardsContainer cardsData={prop.sidebarCards[i]} key={i}/>);
+        } else {
+            prop.sidebarCards[i].generatePaths('');
+            containers.push(<GenerateCardsContainer cardsData={prop.sidebarCards[i]} key={i}/>);
+        }
     }
 
     return (

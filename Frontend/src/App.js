@@ -13,6 +13,7 @@ import './DesktopComponents/Desktopcss/DesktopHome.css';
 import './CommonCss/Global.css';
 import './CommonCss/Sidebar.css';
 import './CommonCss/Register.css';
+import AllRecipesPage from './CommonComponents/AllRecipesPage';
 
 
 
@@ -39,6 +40,9 @@ function App() {
           </Route>
           <Route path = '/registerlogin'
             element = {<RegisterPage whichClass={whichClass}/>}>
+          </Route>
+          <Route path = '/recipes/my-recipes/all-recipes'
+            element = {<AllRecipesPage />}>
           </Route>
       </Routes>
     </BrowserRouter>
