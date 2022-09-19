@@ -1,10 +1,10 @@
 #[macro_use] extern crate rocket;
 
 
-use std::{env, io::Cursor, fmt::Error};
+use std::env;
 
 use mongodb::{Client, Collection, bson::{Document, doc, from_document}};
-use rocket::{serde::json::{Json, serde_json}, futures::{TryStreamExt}, fs::{FileServer}, response::{content::RawJavaScript, Responder, self}, Request, Response, http::ContentType};
+use rocket::{serde::json::{Json}, fs::{FileServer}, futures::TryStreamExt};
 use dotenv::dotenv;
 use serde::{Serialize, Deserialize};
 
@@ -30,7 +30,7 @@ async fn save_recipe(recipe: Json<Recipe>) {
 }
 
 #[get("/my-recipes/all-recipes")]
-async fn retrieve_all_saved_recipes() -> Result<String, Error> {
+async fn retrieve_all_saved_recipes() -> Json<SavedRecipes> {
     let recipes = connect_to_db().await;
  
     let mut cursor = recipes.find(None, None).await.unwrap();
@@ -41,8 +41,9 @@ async fn retrieve_all_saved_recipes() -> Result<String, Error> {
         all_recipes.saved_recipes.push(result)
     }
 
-    serde_json::to_string(&all_recipes)
+    Json(all_recipes)
 }
+
 
 #[get("/my-recipes/<recipe_name>")]
 async fn find_single_recipe(recipe_name: &str) {
@@ -87,3 +88,6 @@ async fn connect_to_db() -> Collection<Document> {
 
     recipes
 }
+
+
+
