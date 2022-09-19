@@ -6,6 +6,9 @@ import React, { useEffect, useState } from "react";
 import MobileHome from './MobileComponents/MobileHome';
 import DesktopHome from './DesktopComponents/DesktopHome';
 import RegisterPage from './CommonComponents/RegisterPage';
+import SavedRecipesPage from './CommonComponents/SavedRecipesPage';
+import BrowseRecipesPage from './CommonComponents/BrowseRecipesPage';
+
 
 
 import './MobileComponents/MobileCss/MobileHome.css';
@@ -13,7 +16,6 @@ import './DesktopComponents/Desktopcss/DesktopHome.css';
 import './CommonCss/Global.css';
 import './CommonCss/Sidebar.css';
 import './CommonCss/Register.css';
-import AllRecipesPage from './CommonComponents/AllRecipesPage';
 
 
 
@@ -42,7 +44,10 @@ function App() {
             element = {<RegisterPage whichClass={whichClass}/>}>
           </Route>
           <Route path = '/recipes/my-recipes/all-recipes'
-            element = {<AllRecipesPage />}>
+            element = {<SavedRecipesPage />}>
+          </Route>
+          <Route path = '/recipes/browse-recipes'
+            element = {<BrowseRecipesPage />}>
           </Route>
       </Routes>
     </BrowserRouter>

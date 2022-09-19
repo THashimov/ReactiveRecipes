@@ -1,6 +1,6 @@
 class SidebarCards {
     title: string;
-    linkTitles: string[];
+    linkTitles: string [];
     linkPaths: string [];
 
     constructor(title: string, linkTitles: string[]) {

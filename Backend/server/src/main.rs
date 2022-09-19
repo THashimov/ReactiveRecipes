@@ -29,13 +29,14 @@ async fn save_recipe(recipe: Json<Recipe>) {
     }, None).await.unwrap();
 }
 
-#[get("/my-recipes/all-recipes")]
+#[get("/my-recipes/all-recipes/get")]
 async fn retrieve_all_saved_recipes() -> Json<SavedRecipes> {
     let recipes = connect_to_db().await;
  
     let mut cursor = recipes.find(None, None).await.unwrap();
 
     let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
+
     while let Some(result) = cursor.try_next().await.unwrap() {
         let result: Recipe = from_document(result).unwrap();
         all_recipes.saved_recipes.push(result)
@@ -45,7 +46,7 @@ async fn retrieve_all_saved_recipes() -> Json<SavedRecipes> {
 }
 
 
-#[get("/my-recipes/<recipe_name>")]
+#[get("/my-recipes/<recipe_name>/get")]
 async fn find_single_recipe(recipe_name: &str) {
     let query = doc! { "name": recipe_name};
 
@@ -61,6 +62,7 @@ async fn find_single_recipe(recipe_name: &str) {
 #[launch]
 fn rocket() -> _ {
     rocket::build()
+    .attach(Cors)
     .mount("/recipes", routes![save_recipe, find_single_recipe, retrieve_all_saved_recipes])
     .mount("/", FileServer::from("../../Frontend/build/"))
 }
@@ -90,4 +92,34 @@ async fn connect_to_db() -> Collection<Document> {
 }
 
 
+// // // // // // // Cors workaround // // // // // //
+use rocket::fairing::{Fairing, Info, Kind};
+use rocket::http::Header;
+use rocket::{Request, Response};
 
+#[options("/<_..>")]
+fn all_options() {
+    /* Intentionally left empty */
+}
+
+pub struct Cors;
+
+#[rocket::async_trait]
+impl Fairing for Cors {
+    fn info(&self) -> Info {
+        Info {
+            name: "Cross-Origin-Resource-Sharing Fairing",
+            kind: Kind::Response,
+        }
+    }
+
+    async fn on_response<'r>(&self, _request: &'r Request<'_>, response: &mut Response<'r>) {
+        response.set_header(Header::new("Access-Control-Allow-Origin", "*"));
+        response.set_header(Header::new(
+            "Access-Control-Allow-Methods",
+            "POST, PATCH, PUT, DELETE, HEAD, OPTIONS, GET",
+        ));
+        response.set_header(Header::new("Access-Control-Allow-Headers", "*"));
+        response.set_header(Header::new("Access-Control-Allow-Credentials", "true"));
+    }
+}
