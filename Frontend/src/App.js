@@ -12,6 +12,7 @@ import BrowseRecipesPageMobile from './MobileComponents/BrowseRecipesPageMobile'
 
 
 import './MobileComponents/MobileCss/MobileHome.css';
+import './MobileComponents/MobileCss/BrowseMobile.css';
 import './DesktopComponents/Desktopcss/DesktopHome.css';
 import './CommonCss/Global.css';
 import './CommonCss/Sidebar.css';

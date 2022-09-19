@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 
-import SidebarCards from "../CommonComponents/Classes/SidebarCards";
 import Sidebar from "../CommonComponents/Sidebar";
 import BurgerMenu from './BurgerMenu';
 import MainLogo from "../CommonComponents/MainLogo";
+import NavbarCardsMobile from "../CommonComponents/Consts/NavbarCardsMobile";
 
 interface NavbarProps {
         class: string;
-        sidebarFeed: SidebarCards;
-        sidebarMyRecipes: SidebarCards;
 }
  
 const Navbar: React.FC<NavbarProps> = (prop) => {
@@ -22,7 +20,7 @@ const Navbar: React.FC<NavbarProps> = (prop) => {
 
     return (
         <div className="navbar">
-                <Sidebar class={sidebarAnim} sidebarCards={[prop.sidebarFeed, prop.sidebarMyRecipes]}/>
+                <Sidebar class={sidebarAnim} sidebarCards={NavbarCardsMobile}/>
                 <BurgerMenu isSidebarOpen={sidebarView} setSidebarState={setSidebarState}/>
                 <MainLogo class={prop.class} />
         </div>

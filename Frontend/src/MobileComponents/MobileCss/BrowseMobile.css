@@ -1,0 +1,48 @@
+.browseMobile {
+    display: flex;  
+    flex-direction: column;
+    background-color: #E9F8F0;
+    height: 100vh;
+    width: 100vw;
+}
+
+.recipeCardContainer {
+    display: flex;
+    flex-direction: column;
+    width: 90vw;
+    align-self: center;
+    background-color: white;
+    align-items: center;
+    object-fit: cover;
+}
+
+.recipeCard {
+    margin: 2rem;
+}
+
+.recipeCard h4 {
+    color: #E00000;
+}
+
+.recipeCard h4,
+.recipeCard h5,
+.ratingContainer {
+    font-size: 20px;
+    font-weight: 400;
+    width: 95%;
+    margin: 0.5rem auto 0.5rem auto;
+}
+
+.ratingContainer {
+    display: flex;
+    margin-top: 2em;
+}
+
+.ratingContainer svg {
+    opacity: 15%;
+}
+
+.ratingContainer p {
+    margin-left: auto;
+    color: #8E8B8B;
+}
