@@ -7,7 +7,7 @@ import MobileHome from './MobileComponents/MobileHome';
 import DesktopHome from './DesktopComponents/DesktopHome';
 import RegisterPage from './CommonComponents/RegisterPage';
 import SavedRecipesPage from './CommonComponents/SavedRecipesPage';
-import BrowseRecipesPage from './CommonComponents/BrowseRecipesPage';
+import BrowseRecipesPageMobile from './MobileComponents/BrowseRecipesPageMobile';
 
 
 
@@ -47,7 +47,7 @@ function App() {
             element = {<SavedRecipesPage />}>
           </Route>
           <Route path = '/recipes/browse-recipes'
-            element = {<BrowseRecipesPage />}>
+            element = {<BrowseRecipesPageMobile />}>
           </Route>
       </Routes>
     </BrowserRouter>
