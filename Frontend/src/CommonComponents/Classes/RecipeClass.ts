@@ -6,8 +6,7 @@ class RecipeClass {
     portions: Number;
     ingredients: [];
     calories: Number;
-    rating: Number;
-    numberOfRatings: Number;
+ 
 
     constructor(
         recipeName: string, 
@@ -26,8 +25,6 @@ class RecipeClass {
             this.portions = portions;
             this.ingredients = ingredients;
             this.calories = calories;
-            this.rating = 0;
-            this.numberOfRatings = 0;
         };
 
     capitalise = () => {

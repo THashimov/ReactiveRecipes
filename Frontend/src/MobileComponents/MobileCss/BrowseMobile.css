@@ -49,9 +49,16 @@
 
 .ratingContainer svg {
     opacity: 15%;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 .ratingContainer p {
     margin-left: auto;
     color: #8E8B8B;
+}
+
+.star.active {
+    color: red;
+    opacity: 100%;
 }
