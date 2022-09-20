@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
-import MainLogo from "../CommonComponents/MainLogo";
 import ZeroWasteImg from '../assets/ZeroWaste.jpg';
 
 import FunctionalButton from '../CommonComponents/FunctionalButton';
-import SidebarCards from "../CommonComponents/Classes/SidebarCards";
 import Navbar from "./Navbar";
 
 const MobileHome: React.FC = () => {
-  
 
     return (
       <div className='mobileHome'>

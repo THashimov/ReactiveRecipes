@@ -26,3 +26,16 @@ test('Remove all white space and set lowercase', (title='My Recipes') => {
   className += 'Container';
   expect(className).toBe('myRecipesContainer');
 });
+
+test('Capitalise letters from api', (title='lunch/dinner') => {
+  let newTitle = '';
+  newTitle += (title.charAt(0).toUpperCase());
+  for (let i = 1; i < title.length; i++) {
+    newTitle += title.charAt(i);
+    if(title.charAt(i) === '/') {
+      newTitle = newTitle + title.charAt(i + 1).toUpperCase() + title.slice(i + 2);
+      break;
+    }
+  }  
+  expect(newTitle).toBe('Lunch/Dinner');
+});

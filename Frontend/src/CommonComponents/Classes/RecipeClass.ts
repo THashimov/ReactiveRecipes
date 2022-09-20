@@ -29,6 +29,19 @@ class RecipeClass {
             this.rating = 0;
             this.numberOfRatings = 0;
         };
+
+    capitalise = () => {
+        let newTitle: string = '';
+        newTitle += (this.mealType.charAt(0).toUpperCase());
+        for (let i = 1; i < this.mealType.length; i++) {
+          newTitle += this.mealType.charAt(i);
+          if(this.mealType.charAt(i) === '/') {
+            newTitle = newTitle + this.mealType.charAt(i + 1).toUpperCase() + this.mealType.slice(i + 2);
+            break;
+          }
+        } 
+        this.mealType = newTitle;
+    }
 }
 
 export default RecipeClass;
