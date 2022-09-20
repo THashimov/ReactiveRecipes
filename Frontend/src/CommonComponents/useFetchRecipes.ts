@@ -9,6 +9,7 @@ const useFetchRecipes = (arg: String) => {
     const [apiData, setApiData] = useState<RecipeClass[]>();
 
     useEffect(() => {
+        setTimeout(() => {
         const recipes = fetch('' + arg)
         .then(res => res.json())
         .then(
@@ -23,7 +24,7 @@ const useFetchRecipes = (arg: String) => {
                 }
             }
         );
-
+    }, 2000);
     }, [arg])
 
     return {savedData, apiData, isLoading}

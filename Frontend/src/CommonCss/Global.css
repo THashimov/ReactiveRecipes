@@ -9,6 +9,7 @@
 
 :root {
     --funcBtnWidth: 16em;
+    --browsePageHomeHeight: 100vh;
 }
 
 /* -- -- -- -- -- -- -- -- -- -- Functional Buttons -- -- -- -- -- -- -- -- -- -- */
@@ -26,5 +27,28 @@
     border-radius: 10px;
     font-size: 14px;
 }
+
+/* -- -- -- -- -- -- -- -- -- -- Loading Symbol -- -- -- -- -- -- -- -- -- -- */
+
+.loadingSpinner {
+    position: absolute;
+    top: 50vh;
+    left: 45vw;
+    animation-name: spin;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.loadingSpinner svg {
+    color: black;
+
+}
+
 
 /* -- -- -- -- -- -- -- -- -- -- xxxxx -- -- -- -- -- -- -- -- -- -- */

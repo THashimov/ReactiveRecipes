@@ -2,7 +2,7 @@
     display: flex;  
     flex-direction: column;
     background-color: #E9F8F0;
-    height: 100%;
+    min-height: var(--browsePageHomeHeight);
     width: 100vw;
 }
 
