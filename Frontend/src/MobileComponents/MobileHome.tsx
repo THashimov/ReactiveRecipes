@@ -1,7 +1,5 @@
 import React from "react";
 
-import ZeroWasteImg from '../assets/ZeroWaste.jpg';
-
 import FunctionalButton from '../CommonComponents/FunctionalButton';
 import Navbar from "./Navbar";
 
@@ -15,7 +13,7 @@ const MobileHome: React.FC = () => {
             <h2>Let Us Help You Reduce Food Waste</h2>
           </div>
           <FunctionalButton title='Get Started' whichClass='functionalBtn getStartedBtn' imgSrc={null}/>
-          <img src={ZeroWasteImg} alt="" className='zeroWasteImg' />
+          <img src='images/ZeroWaste.jpg' alt="" className='zeroWasteImg' />
       </div>
     )
 } 

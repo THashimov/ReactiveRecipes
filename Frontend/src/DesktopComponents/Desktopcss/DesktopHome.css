@@ -13,6 +13,7 @@
     right: 0;
     width: calc(100vw - var(--desktopSidebarWidth));
     height: 100vh;
+    padding-bottom: 2.5%;
 }
 
 
@@ -32,15 +33,60 @@
     margin-top: 3em;
 }
 
-.trendingRecipesCarouselContainer {
+.carousel-container {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: calc(600px + (10px * 3));
+    position: relative;
 }
 
-.trendingRecipesCarousel {
+.carousel-container .carousel-previous,
+.carousel-container .carousel-next {
+    position: absolute;
+    top: calc(50%);
+    padding: 10px;
+}
+
+.carousel-container .carousel-previous:hover,
+.carousel-container .carousel-next:hover { cursor: pointer; }
+
+.carousel-container .carousel-previous {
+    left: -30px;
+}
+
+.carousel-container .carousel-next {
+    right: -30px;
+}
+
+.carousel-body {
     display: flex;
     overflow: hidden;
-    justify-content: space-between;
+    gap: 10px;
     width: 100%;
 }
+
+.carousel-body img { position: relative; }
+
+.carousel-body .carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-content: space-around;
+    position: relative;
+    left: 0;
+    transition-property: left, right;
+    transition-duration: 1s;
+}
+
+.carousel-body .carousel-item .carousel-item-title {
+    font-size: 16px;
+    color: #8E8B8B;
+    margin: 4% 0;
+}
+
+.carousel-body .carousel-item .carousel-item-rating {
+    display: flex;
+    gap: 2.5%;
+}
+
+.carousel-body .carousel-item .rating-stars,
+.carousel-body .carousel-item .rating-count { display: inline-block; }
