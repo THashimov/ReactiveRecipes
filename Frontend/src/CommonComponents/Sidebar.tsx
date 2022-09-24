@@ -6,12 +6,12 @@ import SidebarCards from "./Classes/SidebarCards";
 import FunctionalButton from "./FunctionalButton";
 import GenerateCardsContainer from "./GenerateCardsContainers";
 
-interface SidebarProps {
+type T = {
     class: string;
     sidebarCards: SidebarCards [];
 }
  
-const Sidebar: React.FC<SidebarProps> = (prop) => {
+const Sidebar: React.FC<T> = (prop) => {
     let containers: JSX.Element [] = [];
 
     for (let i = 0; i < prop.sidebarCards.length; i++) {

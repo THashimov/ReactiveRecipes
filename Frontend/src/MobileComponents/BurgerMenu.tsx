@@ -4,12 +4,12 @@ import { MdOutlineClose } from 'react-icons/md';
 
 import changeSidebarView from '../CommonComponents/ChangeSidebarView';
 
-interface BurgerMenuProps {
+type T = {
     isSidebarOpen: boolean;
     setSidebarState: React.Dispatch<React.SetStateAction<boolean>>;
 }
  
-const BurgerMenu: React.FC<BurgerMenuProps> = (prop) => {
+const BurgerMenu: React.FC<T> = (prop) => {
     const [btnToRender, setBtnToRender] = useState<ReactNode>(<HiMenu/>);
 
     useEffect(() => {

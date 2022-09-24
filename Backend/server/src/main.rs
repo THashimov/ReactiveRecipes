@@ -1,31 +1,28 @@
 #[macro_use] extern crate rocket;
 
+mod recipe;
 
 use std::env;
-
-use mongodb::{Client, Collection, bson::{Document, doc, from_document}};
-use rocket::{serde::json::{Json}, fs::{FileServer}, futures::TryStreamExt};
+use recipe::{Recipe, SavedRecipes, Ingredients};
+use mongodb::{Client, Collection, bson::{Document, doc, from_document, bson}};
+use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::TryStreamExt};
 use dotenv::dotenv;
-use serde::{Serialize, Deserialize};
 
-#[derive(Debug, Serialize, Deserialize)]
-struct Recipe {
-    name: String,
-    ingredients: String
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct SavedRecipes {
-    saved_recipes: Vec<Recipe>
-}
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>) {
-    let recipes = connect_to_db().await;
+    let db = connect_to_db().await;
+    
+    db.insert_one(doc! {
+        "name": &recipe.name,
+        "mealType": &recipe.meal_type,
+        "imgUrl": &recipe.img_url,
+        "healthLabels": &recipe.health_labels, 
+        "portions": &recipe.portions, 
+        "ingredients": &recipe.ingredients, 
+        "calories": &recipe.calories, 
+        "urlToRecipe": &recipe.url_to_recipe, 
 
-    recipes.insert_one(doc! {
-        "name": recipe.name.to_owned(),
-        "ingredients": recipe.ingredients.to_owned()
     }, None).await.unwrap();
 }
 
@@ -98,7 +95,7 @@ use rocket::http::Header;
 use rocket::{Request, Response};
 
 #[options("/<_..>")]
-fn all_options() {
+fn _all_options() {
     /* Intentionally left empty */
 }
 

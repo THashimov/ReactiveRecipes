@@ -5,15 +5,13 @@ import Email from '../assets/email.png';
 import Facebook from '../assets/facebook.png';
 import Google from '../assets/google.png';
 
-
-
 import FunctionalButton from "./FunctionalButton";
 
-interface RegisterPageProps {
+type T = {
     whichClass: string;
 }
  
-const RegisterPage: React.FC<RegisterPageProps> = (prop) => {
+const RegisterPage: React.FC<T> = (prop) => {
 
     return (
         <div className={prop.whichClass}>

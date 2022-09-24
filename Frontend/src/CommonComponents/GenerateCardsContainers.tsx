@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import SidebarCards from "./Classes/SidebarCards";
 
-interface GenerateCardsContainerProps {
+type T = {
     cardsData: SidebarCards;
 }
  
-const GenerateCardsContainer: React.FC<GenerateCardsContainerProps> = (prop) => {
+const GenerateCardsContainer: React.FC<T> = (prop) => {
     let className = prop.cardsData.title.replace(/\s|\//g, '');
     className = className.charAt(0).toLowerCase() + className.slice(1);
     className += 'Container';

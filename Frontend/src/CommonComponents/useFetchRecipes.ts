@@ -31,18 +31,26 @@ const useFetchRecipes = (arg: String) => {
 }
 
 const createClass = (recipeData) : RecipeClass [] => {
+    console.log(recipeData)
     let recipes: RecipeClass [] = [];
+    let ingredients = [];
+
+    for (let i = 0; i < recipeData.ingredients.length; i++) {
+        
+    }
+
     for (let i = 0; i < recipeData.length; i++) {
         let recipeName = recipeData[i].recipe.label;
         let mealType = recipeData[i].recipe.mealType[0];
         let imgUrl = recipeData[i].recipe.images.REGULAR.url;
         let healthLabels = recipeData[i].recipe.healthLabels
         let portions = recipeData[i].recipe.yield;
-        let ingredients = recipeData[i].recipe.ingredients[0].food;
+        let ingredients = recipeData[i].recipe.ingredients[i];
         let calories = recipeData[i].recipe.totalNutrients.ENERC_KCAL.quantity;
+        let url = recipeData[i].recipe.url;
     
         const recipe = new RecipeClass(
-            recipeName, mealType, imgUrl, healthLabels, portions, ingredients, calories
+            recipeName, mealType, imgUrl, healthLabels, portions, ingredients, calories, url
         );
 
         recipes.push(recipe);

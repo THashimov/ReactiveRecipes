@@ -5,17 +5,18 @@ import Navbar from "./Navbar";
 import useFetchRecipes from "../CommonComponents/useFetchRecipes";
 import RecipeCardsPreview from "../CommonComponents/RecipeCardsPreview";
 
-interface BrowseRecipesPageMobileProps {
+type T = {
     
 }
 
  
-const BrowseRecipesPageMobile: React.FC<BrowseRecipesPageMobileProps> = () => {
+const BrowseRecipesPageMobile: React.FC<T> = () => {
     const addr: String = (process.env.REACT_APP_PRODUCT_SEARCH_URL) as string + 'italian' + process.env.REACT_APP_API_KEY;
     const [recipeCards, setRecipeCards] = useState<JSX.Element []>();
     const {savedData, apiData, isLoading} = useFetchRecipes(addr);
 
-
+    console.log(apiData);
+    
     const cssRoot: Element | null = document.querySelector(':root');
 
     useEffect(() => {
@@ -30,7 +31,7 @@ const BrowseRecipesPageMobile: React.FC<BrowseRecipesPageMobileProps> = () => {
     useEffect(() => {
       if (apiData != undefined) {
         for (let i = 0; i < apiData.length; i++) {
-          apiData[i].capitalise();
+          apiData[i].capitaliseMealType();
           recipes.push(<RecipeCardsPreview recipeCard={apiData[i]} key={i} />)
         }
         setRecipeCards(recipes);

@@ -9,8 +9,6 @@ import NavbarCardsDesktop from "../CommonComponents/Consts/NavbarCardsDesktop";
 
 
 const DesktopHome: React.FC = () => {
-    
-
 
     return (
         <div className='desktopHome'>

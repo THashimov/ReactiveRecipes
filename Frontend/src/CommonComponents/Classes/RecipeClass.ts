@@ -1,11 +1,15 @@
+import IngredientsClass from './IngredientsClass';
+
+
 class RecipeClass {
     recipeName: string;
     mealType: string;
     imgUrl: string;
     healthLabels: string [];
     portions: Number;
-    ingredients: [];
+    ingredients: IngredientsClass [];
     calories: Number;
+    url: string;
  
 
     constructor(
@@ -14,8 +18,9 @@ class RecipeClass {
         imgUrl: string, 
         healthLabels: string[], 
         portions: Number, 
-        ingredients: [],
-        calories: Number
+        ingredients: IngredientsClass [],
+        calories: Number,
+        url: string
         ) 
         {
             this.recipeName = recipeName; 
@@ -25,9 +30,10 @@ class RecipeClass {
             this.portions = portions;
             this.ingredients = ingredients;
             this.calories = calories;
+            this.url = url;
         };
 
-    capitalise = () => {
+    capitaliseMealType = () => {
         let newTitle: string = '';
         newTitle += (this.mealType.charAt(0).toUpperCase());
         for (let i = 1; i < this.mealType.length; i++) {

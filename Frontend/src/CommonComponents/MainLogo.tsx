@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Logo from '../assets/Logo.svg';
 
 
-interface MainLogoProps {
+type T = {
     class: string;
 }
  
-const MainLogo: React.FC<MainLogoProps> = (prop) => {
+const MainLogo: React.FC<T> = (prop) => {
     return (
         <Link className={prop.class} to='/'>
             <img src={Logo} alt="" />

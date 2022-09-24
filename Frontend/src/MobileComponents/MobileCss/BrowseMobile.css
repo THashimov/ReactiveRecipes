@@ -49,8 +49,8 @@
 
 .ratingContainer svg {
     opacity: 15%;
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 .ratingContainer p {
@@ -61,4 +61,12 @@
 .star.active {
     color: red;
     opacity: 100%;
+}
+
+.saveRecipeBtn {
+    width: 50% !important;
+    margin-right: auto;
+    margin-left: auto;
+    height: 2rem !important;
+    margin-top: 1.5rem !important;
 }

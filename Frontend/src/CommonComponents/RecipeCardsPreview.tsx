@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import RecipeClass from "./Classes/RecipeClass";
 import {AiFillStar} from 'react-icons/ai'
 import { Link } from "react-router-dom";
+import RequestButton from "./RequestButton";
 
-interface RecipeCardsPreviewProps {
+type T = {
     recipeCard: RecipeClass;
 }
  
-const RecipeCardsPreview: React.FC<RecipeCardsPreviewProps> = (recipeCard) => {
+const RecipeCardsPreview: React.FC<T> = (recipeCard) => {
     let stars: JSX.Element [] = []
 
     const rating = Math.floor(Math.random() * 5);
@@ -34,6 +35,7 @@ const RecipeCardsPreview: React.FC<RecipeCardsPreviewProps> = (recipeCard) => {
                         {stars}
                          <p>{numberOfRatings}</p>
                      </div>
+                <RequestButton title='Save Recipe' whichClass='functionalBtn saveRecipeBtn'/>
              </div>
         </div>
     );
