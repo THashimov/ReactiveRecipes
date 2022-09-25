@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import Logo from '../assets/Logo.svg';
-
-
 type T = {
     class: string;
 }
@@ -11,7 +8,7 @@ type T = {
 const MainLogo: React.FC<T> = (prop) => {
     return (
         <Link className={prop.class} to='/'>
-            <img src={Logo} alt="" />
+            <img src='images/Logo.svg' alt="" />
         </Link>
       );
 }
