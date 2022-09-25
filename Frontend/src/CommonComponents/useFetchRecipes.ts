@@ -31,13 +31,7 @@ const useFetchRecipes = (arg: String) => {
 }
 
 const createClass = (recipeData) : RecipeClass [] => {
-    console.log(recipeData)
     let recipes: RecipeClass [] = [];
-    let ingredients = [];
-
-    for (let i = 0; i < recipeData.ingredients.length; i++) {
-        
-    }
 
     for (let i = 0; i < recipeData.length; i++) {
         let recipeName = recipeData[i].recipe.label;

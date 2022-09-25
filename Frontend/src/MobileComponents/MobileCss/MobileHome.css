@@ -7,9 +7,9 @@
 .fixed {
     background-color: #E9F8F0;
     position: fixed;
-    z-index: 2;
-
+    z-index: 3;
 }
+
 .navbarLogo {
     width: 90vw;
     flex-basis: auto;

@@ -15,9 +15,7 @@ const BrowseRecipesPageMobile: React.FC<T> = () => {
     const [recipeCards, setRecipeCards] = useState<JSX.Element []>();
     const {savedData, apiData, isLoading} = useFetchRecipes(addr);
 
-    console.log(apiData);
-    
-    const cssRoot: Element | null = document.querySelector(':root');
+    const cssRoot: HTMLElement | null = document.querySelector(':root');
 
     useEffect(() => {
       if (cssRoot !== null) {

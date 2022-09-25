@@ -1,13 +1,15 @@
 import React from "react";
+import RecipeClass from "./Classes/RecipeClass";
 
 type T = {
     title: string;
     whichClass: string;
+    recipe: RecipeClass
 };
 
-const FunctionalButton: React.FC<T> = ({title, whichClass}) => {
+const FunctionalButton: React.FC<T> = ({title, whichClass, recipe}) => {
     const postRequest = () => {
-        
+        console.log(recipe)
     }
 
     return (

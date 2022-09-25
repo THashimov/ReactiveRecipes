@@ -8,7 +8,7 @@ type T = {
     recipeCard: RecipeClass;
 }
  
-const RecipeCardsPreview: React.FC<T> = (recipeCard) => {
+const RecipeCardsPreview: React.FC<T> = ({recipeCard}) => {
     let stars: JSX.Element [] = []
 
     const rating = Math.floor(Math.random() * 5);
@@ -27,15 +27,15 @@ const RecipeCardsPreview: React.FC<T> = (recipeCard) => {
         <div className='recipeCardContainer'>
             <div className="recipeCard">
                  <Link to='/recipe-instructions' >
-                     <img src={recipeCard.recipeCard.imgUrl} alt="" />
+                     <img src={recipeCard.imgUrl} alt="" />
                  </Link>
-                 <h4>{recipeCard.recipeCard.mealType}</h4>
-                 <h5>{recipeCard.recipeCard.recipeName}</h5>
+                 <h4>{recipeCard.mealType}</h4>
+                 <h5>{recipeCard.recipeName}</h5>
                      <div className="ratingContainer">
                         {stars}
                          <p>{numberOfRatings}</p>
                      </div>
-                <RequestButton title='Save Recipe' whichClass='functionalBtn saveRecipeBtn'/>
+                <RequestButton title='Save Recipe' whichClass='functionalBtn saveRecipeBtn' recipe={recipeCard}/>
              </div>
         </div>
     );

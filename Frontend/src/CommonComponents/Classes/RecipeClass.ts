@@ -10,6 +10,9 @@ class RecipeClass {
     ingredients: IngredientsClass [];
     calories: Number;
     url: string;
+    rating: Number;
+    howManyRatings: Number;
+    recipeCard: any;
  
 
     constructor(
@@ -31,6 +34,8 @@ class RecipeClass {
             this.ingredients = ingredients;
             this.calories = calories;
             this.url = url;
+            this.rating = 0;
+            this.howManyRatings = 0;
         };
 
     capitaliseMealType = () => {
