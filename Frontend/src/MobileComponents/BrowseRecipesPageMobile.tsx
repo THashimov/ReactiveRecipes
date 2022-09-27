@@ -15,7 +15,7 @@ const BrowseRecipesPageMobile: React.FC<T> = () => {
 
     
     useEffect(() => {
-      const query = ['italian', 'american', 'british', 'world', 'south east asian', 'korean', 'japanese', 'greek', 'french'];
+      const query = ['italian', 'american', 'world', 'korean', 'japanese', 'greek', 'french'];
       const index = Math.floor(Math.random() * query.length);
 
       setQuery(query[index])

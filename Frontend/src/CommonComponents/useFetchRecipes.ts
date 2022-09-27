@@ -35,21 +35,7 @@ const createClass = (recipeData) : RecipeClass [] => {
     let recipes: RecipeClass [] = [];
 
     for (let i = 0; i < recipeData.length; i++) {
-        let ingredients: IngredientsClass [] = [];
-
-        for (let i = 0; i < recipeData[i].recipe.ingredients; i++) {
-            let food = recipeData[i].ingredients[i].food;
-            let foodCategory = recipeData[i].ingredients[i].foodCategory;
-            let imgUrl = recipeData[i].ingredients[i].image;
-            let text = recipeData[i].ingredients[i].text;
-            let weight = recipeData[i].ingredients[i].weight;
-
-            const ingredient = new IngredientsClass(
-                food, foodCategory, imgUrl, text, weight
-            )
-
-            ingredients.push(ingredient)
-        }
+        let ingredients = createIngredientsArray(recipeData[i].recipe.ingredients)
         let recipeName = recipeData[i].recipe.label;
         let mealType = recipeData[i].recipe.mealType[0];
         let imgUrl = recipeData[i].recipe.images.REGULAR.url;
@@ -64,9 +50,29 @@ const createClass = (recipeData) : RecipeClass [] => {
 
         recipes.push(recipe);
     }
-    
 
     return recipes
+}
+
+const createIngredientsArray = (ingredientData) : IngredientsClass [] => {
+    let ingredients: IngredientsClass [] = [];
+
+    for (let i = 0; i < ingredientData.length; i++) {
+
+        let food = ingredientData[i].food;
+        let foodCategory = ingredientData[i].foodCategory;
+        let imgUrl = ingredientData[i].image;
+        let text = ingredientData[i].text;
+        let weight = ingredientData[i].weight;
+    
+        const ingredientClass = new IngredientsClass(
+            food, foodCategory, imgUrl, text, weight
+        );
+        
+        ingredients.push(ingredientClass);
+    };
+    
+    return ingredients
 }
 
 export default useFetchRecipes;

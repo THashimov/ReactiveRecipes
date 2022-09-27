@@ -3,42 +3,55 @@
 mod recipe;
 mod database;
 
-use recipe::{Recipe, SavedRecipes};
+use recipe::{Recipe, SavedRecipes, Ingredients};
 use database::Database;
-use mongodb::{bson::{doc, from_document}};
-use rocket::{serde::json::{Json}, fs::{FileServer}, futures::TryStreamExt, State};
+use mongodb::{bson::{doc, from_document, self}};
+use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::TryStreamExt, State};
 
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
+    // This feels like it's probably quite inefficient, there is likely a better way to do this using serde. Needs looking at
+    let mut ingredients = vec![];
+    
+    for i in 0..recipe.ingredients.len() {
+        let ing = Ingredients::new_ingredients(
+            recipe.ingredients[i].food.clone(), 
+            recipe.ingredients[i].food_category.clone(), 
+            recipe.ingredients[i].img_url.clone(), 
+            recipe.ingredients[i].text.clone(), 
+            recipe.ingredients[i].weight);
+        ingredients.push(ing);
+    }
 
-    println!("{:?}", recipe);
+    let recipe = Recipe::new_recipe(
+        recipe.recipe_name.clone(), 
+        recipe.meal_type.clone(), 
+        recipe.img_url.clone(), 
+        recipe.health_labels.clone(), 
+        recipe.portions, 
+        ingredients, 
+        recipe.calories, 
+        recipe.url_to_recipe.clone(), 
+        recipe.rating, 
+        recipe.how_many_ratings);
 
-    // db.insert_one(doc! {
-    //     "name": &recipe.name,
-    //     "mealType": &recipe.meal_type,
-    //     "imgUrl": &recipe.img_url,
-    //     "healthLabels": &recipe.health_labels, 
-    //     "portions": &recipe.portions, 
-    //     "ingredients": &recipe.ingredients, 
-    //     "calories": &recipe.calories, 
-    //     "urlToRecipe": &recipe.url_to_recipe, 
-
-    // }, None).await.unwrap();
+        db.collection.insert_one(recipe, None).await.unwrap();
 }
 
 #[get("/my-recipes/all-recipes/get")]
-async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> {
-    let mut cursor = db.db.find(None, None).await.unwrap();
+async fn retrieve_all_saved_recipes(db: &State<Database>)  {
+    // let mut cursor = db.collection.find(None, None).await.unwrap();
 
-    let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
+    // let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
 
-    while let Some(result) = cursor.try_next().await.unwrap() {
-        let result: Recipe = from_document(result).unwrap();
-        all_recipes.saved_recipes.push(result)
-    }
+    // while let Some(result) = cursor.try_next().await.unwrap() {
+    //     let result: Recipe = from_document(result).unwrap();
+    //     all_recipes.saved_recipes.push(result)
+    // }
 
-    Json(all_recipes)
+    // Json(all_recipes)
+
 }
 
 
@@ -46,7 +59,7 @@ async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> 
 async fn find_single_recipe(recipe_name: &str, db: &State<Database>) {
     let query = doc! { "name": recipe_name};
 
-    if let Ok(Some(recipe_in_doc)) = db.db.find_one(query.clone(), None).await {
+    if let Ok(Some(recipe_in_doc)) = db.collection.find_one(query.clone(), None).await {
         println!("{:?}", Json(recipe_in_doc));
     } else {
         println!("err");
