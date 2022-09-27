@@ -11,7 +11,17 @@ type T = {
 
  
 const BrowseRecipesPageMobile: React.FC<T> = () => {
-    const addr: String = (process.env.REACT_APP_PRODUCT_SEARCH_URL) as string + 'italian' + process.env.REACT_APP_API_KEY;
+    const [query, setQuery] = useState<String>('italian');
+
+    
+    useEffect(() => {
+      const query = ['italian', 'american', 'british', 'world', 'south east asian', 'korean', 'japanese', 'greek', 'french'];
+      const index = Math.floor(Math.random() * query.length);
+
+      setQuery(query[index])
+    }, [])
+
+    const addr: String = (process.env.REACT_APP_PRODUCT_SEARCH_URL) as string + query + process.env.REACT_APP_API_KEY;
     const [recipeCards, setRecipeCards] = useState<JSX.Element []>();
     const {savedData, apiData, isLoading} = useFetchRecipes(addr);
 
@@ -22,8 +32,7 @@ const BrowseRecipesPageMobile: React.FC<T> = () => {
         isLoading ? cssRoot.style.setProperty('--browseHomePageHeight', '100vh') : cssRoot.style.setProperty('--browseHomePageHeight', '100%')
       }
     }, [isLoading])
-
-
+  
     const recipes: JSX.Element [] = [];
 
     useEffect(() => {

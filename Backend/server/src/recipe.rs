@@ -9,14 +9,16 @@ pub struct SavedRecipes {
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Recipe {
-    pub name: String,
+    pub recipe_name: String,
     pub meal_type: String,
     pub img_url: String,
     pub health_labels: Vec<String>,
     pub portions: f32,
-    pub ingredients: Ingredients,
+    pub ingredients: Vec<Ingredients>,
     pub calories: f32,
-    pub url_to_recipe: String
+    pub url_to_recipe: String,
+    pub rating: f32,
+    pub how_many_ratings: f32
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -25,7 +27,6 @@ pub struct Ingredients {
     pub food: String,
     pub food_category: String,
     pub img_url: String,
-    pub measure: String,
     pub text: String,
     pub weight: f32
 }   

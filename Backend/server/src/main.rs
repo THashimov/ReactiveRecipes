@@ -1,17 +1,16 @@
 #[macro_use] extern crate rocket;
 
 mod recipe;
+mod database;
 
-use std::env;
-use recipe::{Recipe, SavedRecipes, Ingredients};
-use mongodb::{Client, Collection, bson::{Document, doc, from_document, bson}};
-use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::TryStreamExt};
-use dotenv::dotenv;
+use recipe::{Recipe, SavedRecipes};
+use database::Database;
+use mongodb::{bson::{doc, from_document}};
+use rocket::{serde::json::{Json}, fs::{FileServer}, futures::TryStreamExt, State};
 
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
-async fn save_recipe(recipe: Json<Recipe>) {
-    let db = connect_to_db().await;
+async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
 
     println!("{:?}", recipe);
 
@@ -29,10 +28,8 @@ async fn save_recipe(recipe: Json<Recipe>) {
 }
 
 #[get("/my-recipes/all-recipes/get")]
-async fn retrieve_all_saved_recipes() -> Json<SavedRecipes> {
-    let recipes = connect_to_db().await;
- 
-    let mut cursor = recipes.find(None, None).await.unwrap();
+async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> {
+    let mut cursor = db.db.find(None, None).await.unwrap();
 
     let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
 
@@ -46,12 +43,10 @@ async fn retrieve_all_saved_recipes() -> Json<SavedRecipes> {
 
 
 #[get("/my-recipes/<recipe_name>/get")]
-async fn find_single_recipe(recipe_name: &str) {
+async fn find_single_recipe(recipe_name: &str, db: &State<Database>) {
     let query = doc! { "name": recipe_name};
 
-    let recipes = connect_to_db().await;
-   
-    if let Ok(Some(recipe_in_doc)) = recipes.find_one(query.clone(), None).await {
+    if let Ok(Some(recipe_in_doc)) = db.db.find_one(query.clone(), None).await {
         println!("{:?}", Json(recipe_in_doc));
     } else {
         println!("err");
@@ -59,36 +54,16 @@ async fn find_single_recipe(recipe_name: &str) {
 }
 
 #[launch]
-fn rocket() -> _ {
+async fn rocket() -> _ {
+    let db = Database::init().await;
     rocket::build()
     .attach(Cors)
     .mount("/recipes", routes![save_recipe, find_single_recipe, retrieve_all_saved_recipes])
     .mount("/", FileServer::from("../../Frontend/build/"))
+    .manage(db)
 }
 
 
-
-
-
-
-
-
-// // // // // // // // Helpers - to be moved in future  // //  // // // // // // 
-
-async fn connect_to_db() -> Collection<Document> {
-    dotenv().ok();
-
-    let uri = match env::var("MONGOURI") {
-        Ok(uri) => uri,
-        Err(_) => format!("No uri found")
-    };
-
-    let client = Client::with_uri_str(uri).await.unwrap();
-    let db = client.database("recipe");
-    let recipes: Collection<Document> = db.collection("recipes");
-
-    recipes
-}
 
 
 // // // // // // // Cors workaround // // // // // //

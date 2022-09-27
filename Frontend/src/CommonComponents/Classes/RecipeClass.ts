@@ -9,11 +9,10 @@ class RecipeClass {
     portions: Number;
     ingredients: IngredientsClass [];
     calories: Number;
-    url: string;
+    urlToRecipe: string;
     rating: Number;
     howManyRatings: Number;
     recipeCard: any;
- 
 
     constructor(
         recipeName: string, 
@@ -23,7 +22,7 @@ class RecipeClass {
         portions: Number, 
         ingredients: IngredientsClass [],
         calories: Number,
-        url: string
+        urlToRecipe: string
         ) 
         {
             this.recipeName = recipeName; 
@@ -33,7 +32,7 @@ class RecipeClass {
             this.portions = portions;
             this.ingredients = ingredients;
             this.calories = calories;
-            this.url = url;
+            this.urlToRecipe = urlToRecipe;
             this.rating = 0;
             this.howManyRatings = 0;
         };

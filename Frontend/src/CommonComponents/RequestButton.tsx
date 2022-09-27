@@ -8,7 +8,7 @@ type T = {
 };
 
 const FunctionalButton: React.FC<T> = ({title, whichClass, recipe}) => {
-    console.log(JSON.stringify(recipe))
+    // console.log(JSON.stringify(recipe))
     const postRequest = () => {
         fetch(
             '/recipes/my-recipes/add-recipe',
@@ -16,7 +16,6 @@ const FunctionalButton: React.FC<T> = ({title, whichClass, recipe}) => {
                 method: 'POST',
                 body: JSON.stringify(recipe)}
         )
-        // console.log(JSON.stringify(recipe, null, 2))
     }
 
     return (
