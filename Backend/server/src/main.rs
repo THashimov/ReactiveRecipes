@@ -50,32 +50,16 @@ async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> 
     };
 
     Json(SavedRecipes{saved_recipes})
-
-    // println!("{:?}", serde_json::to_string_pretty(&saved_recipes))
-
-    // let mut cursor = db.collection.find(None, None).await.unwrap();
-
-    // let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
-
-    // while let Some(result) = cursor.try_next().await.unwrap() {
-    //     let result: Recipe = from_document(result).unwrap();
-    //     all_recipes.saved_recipes.push(result)
-    // }
-
-    // Json(all_recipes)
-
 }
 
 
 #[get("/my-recipes/<recipe_name>/get")]
-async fn find_single_recipe(recipe_name: &str, db: &State<Database>) {
-    let query = doc! { "name": recipe_name};
+async fn find_single_recipe(recipe_name: &str, db: &State<Database>) -> Json<Recipe> {
+    let query = doc! { "recipeName": recipe_name};
+    
+    let recipe = db.collection.find_one(query, None).await.unwrap();
 
-    if let Ok(Some(recipe_in_doc)) = db.collection.find_one(query.clone(), None).await {
-        println!("{:?}", Json(recipe_in_doc));
-    } else {
-        println!("err");
-    }
+    Json(recipe.unwrap())
 }
 
 #[launch]
