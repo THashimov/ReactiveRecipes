@@ -11,6 +11,10 @@ use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::{TryStr
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
+    let query = doc! { "recipeName": &recipe.recipe_name};
+
+    if let Ok(Some(recipe)) = db.collection.find_one(query, None).await {
+    } else {
     // This feels like it's probably quite inefficient, there is likely a better way to do this using serde. Needs looking at
     let mut ingredients = vec![];
     
@@ -37,6 +41,8 @@ async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
         recipe.how_many_ratings);
 
         db.collection.insert_one(recipe, None).await.unwrap();
+    }
+
 }
 
 #[get("/my-recipes/all-recipes/get")]
