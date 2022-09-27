@@ -12,18 +12,20 @@ use dotenv::dotenv;
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>) {
     let db = connect_to_db().await;
-    
-    db.insert_one(doc! {
-        "name": &recipe.name,
-        "mealType": &recipe.meal_type,
-        "imgUrl": &recipe.img_url,
-        "healthLabels": &recipe.health_labels, 
-        "portions": &recipe.portions, 
-        "ingredients": &recipe.ingredients, 
-        "calories": &recipe.calories, 
-        "urlToRecipe": &recipe.url_to_recipe, 
 
-    }, None).await.unwrap();
+    println!("{:?}", recipe);
+
+    // db.insert_one(doc! {
+    //     "name": &recipe.name,
+    //     "mealType": &recipe.meal_type,
+    //     "imgUrl": &recipe.img_url,
+    //     "healthLabels": &recipe.health_labels, 
+    //     "portions": &recipe.portions, 
+    //     "ingredients": &recipe.ingredients, 
+    //     "calories": &recipe.calories, 
+    //     "urlToRecipe": &recipe.url_to_recipe, 
+
+    // }, None).await.unwrap();
 }
 
 #[get("/my-recipes/all-recipes/get")]
