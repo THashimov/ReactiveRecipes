@@ -5,8 +5,8 @@ mod database;
 
 use recipe::{Recipe, SavedRecipes, Ingredients};
 use database::Database;
-use mongodb::{bson::{doc, from_document, self}};
-use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::TryStreamExt, State};
+use mongodb::{bson::{doc, from_document, self}, Cursor};
+use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::{TryStreamExt, StreamExt}, State};
 
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
@@ -40,7 +40,19 @@ async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
 }
 
 #[get("/my-recipes/all-recipes/get")]
-async fn retrieve_all_saved_recipes(db: &State<Database>)  {
+async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> {
+    let mut cursor = db.collection.find(None, None).await.unwrap();
+
+    let mut saved_recipes = vec![];
+
+    while let Some(recipe) = cursor.try_next().await.unwrap() {
+        saved_recipes.push(recipe);
+    };
+
+    Json(SavedRecipes{saved_recipes})
+
+    // println!("{:?}", serde_json::to_string_pretty(&saved_recipes))
+
     // let mut cursor = db.collection.find(None, None).await.unwrap();
 
     // let mut all_recipes = SavedRecipes {saved_recipes: vec![]};
