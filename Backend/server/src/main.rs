@@ -2,18 +2,19 @@
 
 mod recipe;
 mod database;
+mod users;
 
 use recipe::{Recipe, SavedRecipes, Ingredients};
 use database::Database;
-use mongodb::{bson::{doc, from_document, self}, Cursor};
-use rocket::{serde::json::{Json, serde_json}, fs::{FileServer}, futures::{TryStreamExt, StreamExt}, State};
+use mongodb::{bson::{doc}};
+use rocket::{serde::json::{Json}, fs::{FileServer}, futures::{TryStreamExt}, State};
 
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
     let query = doc! { "recipeName": &recipe.recipe_name};
 
-    if let Ok(Some(recipe)) = db.collection.find_one(query, None).await {
+    if let Ok(Some(_)) = db.recipe_collection.find_one(query, None).await {
     } else {
     // This feels like it's probably quite inefficient, there is likely a better way to do this using serde. Needs looking at
     let mut ingredients = vec![];
@@ -40,14 +41,14 @@ async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
         recipe.rating, 
         recipe.how_many_ratings);
 
-        db.collection.insert_one(recipe, None).await.unwrap();
+        db.recipe_collection.insert_one(recipe, None).await.unwrap();
     }
 
 }
 
 #[get("/my-recipes/all-recipes/get")]
 async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> {
-    let mut cursor = db.collection.find(None, None).await.unwrap();
+    let mut cursor = db.recipe_collection.find(None, None).await.unwrap();
 
     let mut saved_recipes = vec![];
 
@@ -63,7 +64,7 @@ async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> 
 async fn find_single_recipe(recipe_name: &str, db: &State<Database>) -> Json<Recipe> {
     let query = doc! { "recipeName": recipe_name};
     
-    let recipe = db.collection.find_one(query, None).await.unwrap();
+    let recipe = db.recipe_collection.find_one(query, None).await.unwrap();
 
     Json(recipe.unwrap())
 }

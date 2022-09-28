@@ -1,12 +1,13 @@
-use mongodb::{Collection, bson::Document, Client};
+use mongodb::{Collection, Client};
 use std::env;
 use dotenv::dotenv;
 
 use crate::recipe::Recipe;
-
+use crate::users::Users;
 
 pub struct Database {
-    pub collection: Collection<Recipe>
+    pub recipe_collection: Collection<Recipe>,
+    pub user_collection: Collection<Users>
 }
 
 impl Database {
@@ -19,9 +20,13 @@ impl Database {
         };
     
         let client = Client::with_uri_str(uri).await.unwrap();
-        let db = client.database("recipe");
-        let recipes: Collection<Recipe> = db.collection("recipes");
         
-        Database {collection: recipes}
+        let recipe_db = client.database("recipes");
+        let users_db = client.database("users");
+
+        let recipes: Collection<Recipe> = recipe_db.collection("recipe");
+        let users: Collection<Users> = users_db.collection("user");
+        
+        Database {recipe_collection: recipes, user_collection: users}
     }
 }
