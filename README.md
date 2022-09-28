@@ -47,7 +47,7 @@
 
 Reactive recipes not only finds recipes for you but it will create a shopping list for you, grouping ingredients together so you know exactly how much you need to buy. There is a long roadmap on this project with many features to be implemented. The main feature being where a user can chose how many days worth of food they would like and Reactive Recipes will group lots of recipes that share ingredients, taking into the acount the average package size of a certain ingredient in order to reduce food waste. 
 
-![product-screenshot](./screenshot.jpg)
+![product-screenshot](./screenshot.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
