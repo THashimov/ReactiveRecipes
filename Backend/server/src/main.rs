@@ -2,19 +2,20 @@
 
 mod recipe;
 mod database;
-mod users;
+mod user;
 
 use recipe::{Recipe, SavedRecipes, Ingredients};
 use database::Database;
-use mongodb::{bson::{doc}};
-use rocket::{serde::json::{Json}, fs::{FileServer}, futures::{TryStreamExt}, State};
+use user::User;
+use mongodb::bson::doc;
+use rocket::{serde::json::{Json}, fs::{FileServer}, State, futures::TryStreamExt, http::Status};
 
 
 #[post("/my-recipes/add-recipe", data = "<recipe>")]
 async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
-    let query = doc! { "recipeName": &recipe.recipe_name};
+    let doc = doc! { "recipeName": &recipe.recipe_name};
 
-    if let Ok(Some(_)) = db.recipe_collection.find_one(query, None).await {
+    if let Ok(Some(_)) = db.recipe_collection.find_one(doc, None).await {
     } else {
     // This feels like it's probably quite inefficient, there is likely a better way to do this using serde. Needs looking at
     let mut ingredients = vec![];
@@ -43,7 +44,29 @@ async fn save_recipe(recipe: Json<Recipe>, db: &State<Database>) {
 
         db.recipe_collection.insert_one(recipe, None).await.unwrap();
     }
+}
 
+#[post("/register", data="<user_data>")]
+async fn user_register(user_data: Json<User>, db: &State<Database>) {
+    let usr = User::new_user(user_data.email.clone(), user_data.password.clone());
+
+    db.user_collection.insert_one(usr, None).await.unwrap();
+}
+
+#[post("/login", data="<user_data>")]
+async fn user_login(user_data: Json<User>, db: &State<Database>) -> Status {
+    let usr = User::new_user(user_data.email.clone(), user_data.password.clone());
+
+    let mut cursor = db.user_collection.find(None, None).await.unwrap();
+
+    while let Some(user_in_db) = cursor.try_next().await.unwrap() {
+        if user_in_db.email == usr.email {
+            if user_in_db.password == usr.password {
+                return Status::Found
+            }
+        }
+    }
+    return Status::NotFound
 }
 
 #[get("/my-recipes/all-recipes/get")]
@@ -75,6 +98,7 @@ async fn rocket() -> _ {
     rocket::build()
     .attach(Cors)
     .mount("/recipes", routes![save_recipe, find_single_recipe, retrieve_all_saved_recipes])
+    .mount("/user", routes![user_login, user_register])
     .mount("/", FileServer::from("../../Frontend/build/"))
     .manage(db)
 }

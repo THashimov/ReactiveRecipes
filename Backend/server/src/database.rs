@@ -3,11 +3,11 @@ use std::env;
 use dotenv::dotenv;
 
 use crate::recipe::Recipe;
-use crate::users::Users;
+use crate::user::User;
 
 pub struct Database {
     pub recipe_collection: Collection<Recipe>,
-    pub user_collection: Collection<Users>
+    pub user_collection: Collection<User>
 }
 
 impl Database {
@@ -25,7 +25,7 @@ impl Database {
         let users_db = client.database("users");
 
         let recipes: Collection<Recipe> = recipe_db.collection("recipe");
-        let users: Collection<Users> = users_db.collection("user");
+        let users: Collection<User> = users_db.collection("users");
         
         Database {recipe_collection: recipes, user_collection: users}
     }
