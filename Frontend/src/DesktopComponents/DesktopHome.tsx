@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Sidebar from '../CommonComponents/Sidebar';
 import Carousel from '../CommonComponents/Carousel'
-import FunctionalButton from '../CommonComponents/FunctionalButton';
+import FunctionalButton from '../CommonComponents/LinkButton';
 import NavbarCardsDesktop from "../CommonComponents/Consts/NavbarCardsDesktop";
 
 

@@ -1,7 +1,7 @@
 import React from "react";
 import MainLogo from './MainLogo';
 
-import FunctionalButton from "./FunctionalButton";
+import FunctionalButton from "./LinkButton";
 
 type T = {
     whichClass: string;

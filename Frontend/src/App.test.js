@@ -1,6 +1,25 @@
-test('Remove all white space and set lowercase', (title='Connect With Facebook') => {
-  const path = '/' + title.replace(/\s|\//g, '').toLowerCase();
-  expect(path).toBe('/connectwithfacebook');
+test('Remove all white space and set lowercase. Insert - between words', (title='Connect With Facebook') => {
+  let new_title = '';
+  for (let i = 0; i < title.length; i++) {
+      if (i < 1) {
+        new_title += title.charAt(i)
+      }
+      // ////// // // // / / /
+      // ////// // // // / / /
+      // ////// // // // / / /
+      // ////// // // // / / /
+      // ////// // // // / / /
+      if (title.charAt(i) == /\/\\/) {
+        new_title += '-';
+        new_title += title.charAt(i);
+        continue;
+      }
+      new_title += title.charAt(i)
+  }
+
+
+  const path = '/' + new_title.replace(/\s|\//g, '').toLowerCase();
+  expect(path).toBe('/connect-with-facebook');
 });
 
 test('Take an array of strings and allocate a path as well as text', () => {

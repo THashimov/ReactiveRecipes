@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import MainLogo from "../CommonComponents/MainLogo";
 import SidebarCards from "./Classes/SidebarCards";
-import FunctionalButton from "./FunctionalButton";
+import FunctionalButton from "./LinkButton";
 import GenerateCardsContainer from "./GenerateCardsContainers";
 
 type T = {

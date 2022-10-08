@@ -12,11 +12,12 @@ import BrowseRecipesPageMobile from './MobileComponents/BrowseRecipesPageMobile'
 
 
 import './MobileComponents/MobileCss/MobileHome.css';
-import './MobileComponents/MobileCss/BrowseMobile.css';
+import './MobileComponents/MobileCss/BrowseRecipesMobile.css';
 import './DesktopComponents/Desktopcss/DesktopHome.css';
 import './CommonCss/Global.css';
 import './CommonCss/Sidebar.css';
 import './CommonCss/Register.css';
+import ConnectWithEmail from './CommonComponents/ConnectWithEmail';
 
 
 
@@ -49,6 +50,9 @@ function App() {
           </Route>
           <Route path = '/recipes/browse-recipes'
             element = {<BrowseRecipesPageMobile />}>
+          </Route>
+          <Route path = '/connectwithemail'
+            element = {<ConnectWithEmail />}>
           </Route>
       </Routes>
     </BrowserRouter>

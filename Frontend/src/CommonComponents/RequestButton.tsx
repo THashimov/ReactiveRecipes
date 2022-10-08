@@ -4,7 +4,7 @@ import RecipeClass from "./Classes/RecipeClass";
 type T = {
     title: string;
     whichClass: string;
-    recipe: RecipeClass
+    recipe: RecipeClass | null
 };
 
 const FunctionalButton: React.FC<T> = ({title, whichClass, recipe}) => {

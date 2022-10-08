@@ -1,6 +1,6 @@
 import React from "react";
 
-import FunctionalButton from '../CommonComponents/FunctionalButton';
+import FunctionalButton from '../CommonComponents/LinkButton';
 import Navbar from "./Navbar";
 
 const MobileHome: React.FC = () => {

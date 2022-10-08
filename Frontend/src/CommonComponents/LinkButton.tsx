@@ -7,9 +7,9 @@ type T = {
     imgSrc: string | null;
 };
 
-const FunctionalButton: React.FC<T> = ({title, whichClass, imgSrc}) => {
+const LinkButton: React.FC<T> = ({title, whichClass, imgSrc}) => {
     const path = title.replace(/\s|\//g, '').toLowerCase();
-
+  
     return (
         <Link to={'/' + path} className={whichClass}>
           {imgSrc && <img src={imgSrc} alt="" />}
@@ -18,4 +18,4 @@ const FunctionalButton: React.FC<T> = ({title, whichClass, imgSrc}) => {
       );
 }
 
-export default FunctionalButton;
+export default LinkButton;
