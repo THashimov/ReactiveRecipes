@@ -53,8 +53,9 @@ async fn user_register(user_data: Json<User>, db: &State<Database>) {
     db.user_collection.insert_one(usr, None).await.unwrap();
 }
 
+// This works but doesn't return anything yet as we don't know what data this will need to return
 #[post("/login", data="<user_data>")]
-async fn user_login(user_data: Json<User>, db: &State<Database>) -> Status {
+async fn user_login(user_data: Json<User>, db: &State<Database>) {
     let usr = User::new_user(user_data.email.clone(), user_data.password.clone());
 
     let mut cursor = db.user_collection.find(None, None).await.unwrap();
@@ -62,11 +63,11 @@ async fn user_login(user_data: Json<User>, db: &State<Database>) -> Status {
     while let Some(user_in_db) = cursor.try_next().await.unwrap() {
         if user_in_db.email == usr.email {
             if user_in_db.password == usr.password {
-                return Status::Found
+                println!("FOUND")
             }
         }
     }
-    return Status::NotFound
+    
 }
 
 
