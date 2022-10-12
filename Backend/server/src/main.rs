@@ -69,6 +69,7 @@ async fn user_login(user_data: Json<User>, db: &State<Database>) -> Status {
     return Status::NotFound
 }
 
+
 #[get("/my-recipes/all-recipes/get")]
 async fn retrieve_all_saved_recipes(db: &State<Database>) -> Json<SavedRecipes> {
     let mut cursor = db.recipe_collection.find(None, None).await.unwrap();

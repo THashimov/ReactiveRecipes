@@ -97,6 +97,8 @@ There are a few dependancies so you will need rust, cargo and npm installed
 - [ ] Show recipes with common ingredients
 - [ ] Generate a shopping list
 - [ ] User login
+- [ ] Add TLS
+
 
 See the [open issues](https://github.com/THashimov/ReactiveRecipes/issues) for a full list of proposed features (and known issues).
 
