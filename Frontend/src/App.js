@@ -1,6 +1,4 @@
-import { BrowserRouter, Routes, Route} from 'react-router-dom';import nodemailer from './nodemailer';
-
-
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import {isMobile} from 'react-device-detect';
 import React, { useEffect, useState } from "react";
 
